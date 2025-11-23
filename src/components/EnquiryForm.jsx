@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 
+const API_BASE_URL = "https://equity-founders-backend.onrender.com";
+
 export default function EnquiryForm() {
   const [form, setForm] = useState({
     name: "",
@@ -30,7 +32,7 @@ export default function EnquiryForm() {
     setStatus({ sending: true, success: false, error: "" });
 
     try {
-      const res = await fetch('http://localhost:3001/api/contact', {
+      const res = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

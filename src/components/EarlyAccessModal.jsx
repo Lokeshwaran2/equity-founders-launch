@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Alert, Spinner } from "react-bootstrap";
 
+const API_BASE_URL = "https://equity-founders-backend.onrender.com";
+
 export default function EarlyAccessModal({ show, onClose }) {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,7 +26,7 @@ export default function EarlyAccessModal({ show, onClose }) {
 
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3001/api/waitlist', {
+      const res = await fetch(`${API_BASE_URL}/api/waitlist`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
