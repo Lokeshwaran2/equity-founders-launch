@@ -48,14 +48,6 @@ export default function LaunchPage() {
                             <Nav.Link href="#features">Features</Nav.Link>
                             <Nav.Link href="#pricing">Early Access</Nav.Link>
                             <Nav.Link href="#contact">Contact</Nav.Link> {/* added */}
-                            <Button
-                                variant="outline-light"
-                                size="sm"
-                                className="ms-2"
-                                onClick={() => setShowModal(true)}
-                            >
-                                Sign in
-                            </Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
