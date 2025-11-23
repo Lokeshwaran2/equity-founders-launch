@@ -1,18 +1,3 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -29,43 +14,6 @@ html, body, #root {
   width: 100%;
   background: #091023;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 /* Page */
@@ -400,3 +348,46 @@ html { scroll-behavior: smooth; }
   transform: translateY(-6px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.4);
 } */
+
+/* iPhone Mockup Styles */
+.iphone-mockup {
+  position: relative;
+  max-width: 380px; /* Control the size of the mockup */
+  margin: auto;
+  transform: rotate(-3deg); /* Give it a slight "crazy" tilt */
+  transition: transform 0.4s ease;
+}
+
+.iphone-mockup:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.iphone-frame {
+  position: relative;
+  background: #111;
+  border: 12px solid #000;
+  border-radius: 50px;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.6), inset 0 0 0 2px #222;
+  padding: 2px; /* Inner bezel */
+}
+
+.iphone-screen {
+  position: relative;
+  background: #091023; /* Match the page background */
+  border-radius: 40px;
+  overflow: hidden;
+  height: 720px; /* Typical phone screen height */
+}
+
+.iphone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 28px;
+  background: #000;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  z-index: 100; /* Ensure it's on top of the swipe card */
+}

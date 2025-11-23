@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {
+import React, { useState, useEffect } from "react";
+import { 
     Container,
     Row,
     Col,
@@ -13,7 +13,8 @@ import HowItWorks from "./components/HowItWorks";
 import FeaturesGrid from "./components/FeaturesGrid";
 import EarlyAccessModal from "./components/EarlyAccessModal";
 import EnquiryForm from "./components/EnquiryForm";
-import WaitlistForm from "./components/WaitlistForm";
+import WaitlistForm from "./components/WaitlistForm"; 
+import FounderSwipeCard from "./components/FounderSwipeCard";
 
 const Testimonial = ({ quote, name, role }) => (
     <div className="testimonial p-4 text-center">
@@ -25,9 +26,74 @@ const Testimonial = ({ quote, name, role }) => (
 
 export default function LaunchPage() {
     const [showModal, setShowModal] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-    return (
-        <div className="page-bg">
+    useEffect(() => {
+        const handleMouseMove = (event) => {
+            setMousePosition({ x: event.clientX, y: event.clientY });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+ 
+    const crazyStyles = `
+        @keyframes crazy-hue-rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        .page-bg {
+            animation: crazy-hue-rotate 20s linear infinite;
+            background: radial-gradient(
+                800px at var(--mouse-x) var(--mouse-y),
+                rgba(29, 78, 216, 0.15),
+                transparent 80%
+            );
+        }
+        @keyframes floating-crazy {
+            0% { transform: translateY(0px) rotate(-2deg); } 
+            50% { transform: translateY(-35px) rotate(4deg) scale(1.1); }
+            100% { transform: translateY(0px) rotate(-2deg); }
+        }
+        .floating-mockup {
+            animation: floating-crazy 6s ease-in-out infinite;
+        }
+        @keyframes pulse-crazy {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 10px 20px rgba(255, 255, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+        .btn-crazy-pulse {
+            animation: pulse-crazy 2s infinite;
+        }
+        .rotated-card-right {
+            transform: rotate(2deg);
+            transition: transform 0.3s ease-in-out;
+        }
+        .rotated-card-right:hover {
+            transform: rotate(0) scale(1.05);
+        }
+        .rotated-card-left {
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease-in-out;
+        }
+        .rotated-card-left:hover {
+            transform: rotate(0) scale(1.05);
+        }
+    `;
+
+    return ( 
+        <div
+            className="page-bg"
+            style={{
+                '--mouse-x': `${mousePosition.x}px`,
+                '--mouse-y': `${mousePosition.y}px`,
+            }}
+        >
+            <style>
+                {crazyStyles}
+            </style>
             <div className="bg-animated" aria-hidden="true">
                 <div className="blob blob-1" />
                 <div className="blob blob-2" />
@@ -57,56 +123,45 @@ export default function LaunchPage() {
                 <Container fluid="lg">
                     <Row className="align-items-center">
                         <Col lg={6} className="text-white hero-content">
-                            <div className="pill">Launch Offer — Free Beta</div>
-                            <h1 className="hero-title mt-3">
-                                Find your co-founder — aligned by skill, vision & equity.
-                            </h1>
-                            <p className="lead text-muted">
-                                Equity-first matching, transparent expectations, and founder tools to move from match to team fast. Built to help founders find the right co-founder and launch with confidence.
-                            </p>
+                            {/* Desktop-only hero text */}
+                            <div className="d-none d-lg-block">
+                                <div className="pill">Launch Offer — Free Beta</div>
+                                <h1 className="hero-title mt-3">
+                                    Find your co-founder — aligned by skill, vision & equity.
+                                </h1>
+                                <p className="lead text-muted">
+                                    Equity-first matching, transparent expectations, and founder tools to move from match to team fast. Built to help founders find the right co-founder and launch with confidence.
+                                </p>
 
-                            <div className="d-flex gap-3 mt-4 flex-wrap">
-                                <a href="#pricing">
-                                    <Button size="lg" className="cta-primary">
-                                        Get Early Access
-                                    </Button>
-                                </a>
-                                <a href="#features">
-                                    <Button size="lg" variant="outline-light">
-                                        Explore Features
-                                    </Button>
-                                </a>
-                            </div>
+                                <div className="d-flex gap-3 mt-4 flex-wrap">
+                                    <a href="#pricing">
+                                        <Button size="lg" className="cta-primary btn-crazy-pulse">
+                                            Get Early Access
+                                        </Button>
+                                    </a>
+                                    <a href="#features">
+                                        <Button size="lg" variant="outline-light">
+                                            Explore Features
+                                        </Button>
+                                    </a>
+                                </div>
 
-                            <div className="trust mt-4 d-flex gap-3 flex-wrap">
-                                <div className="small text-muted">Trusted by early founders</div>
-                                <div className="small text-muted">• Private beta</div>
+                                <div className="trust mt-4 d-flex gap-3 flex-wrap">
+                                    <div className="small text-muted">Trusted by early founders</div>
+                                    <div className="small text-muted">• Private beta</div>
+                                </div>
                             </div>
                         </Col>
 
                         <Col lg={6} className="mt-4 mt-lg-0">
-                            <Card className="mockup-card p-3 floating-mockup">
-                                <div className="mockup-header d-flex align-items-center justify-content-between mb-2">
-                                    <div>
-                                        <div className="small text-muted">Match Profile</div>
-                                        <div className="fw-bold">Anaya Patel</div>
+                            <div className="iphone-mockup">
+                                <div className="iphone-frame">
+                                    <div className="iphone-screen">
+                                        <div className="iphone-notch"><div className="iphone-speaker"></div></div>
+                                        <FounderSwipeCard />
                                     </div>
-                                    <div className="badge-match">92%</div>
                                 </div>
-
-                                <div className="mockup-body d-flex gap-3 align-items-center">
-                                    <div className="avatar" />
-                                    <div className="mockup-info">
-                                        <div className="fw-bold">Product Founder</div>
-                                        <div className="small text-muted">Fintech · Remote</div>
-                                    </div>
-                                    <Button className="ms-auto" variant="primary">
-                                        Message
-                                    </Button>
-                                </div>
-
-                                <div className="mockup-graph mt-3" />
-                            </Card>
+                            </div>
                         </Col>
                     </Row>
                 </Container>
