@@ -1,0 +1,219 @@
+.swipe-deck {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.swipe-deck .mockup-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, opacity 0.4s ease, border-radius 0.2s;
+    will-change: transform;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    color: #fff; /* Set default text color to white */
+    /* Use Flexbox to manage layout and prevent overflow */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Remove default Bootstrap backgrounds */
+.swipe-deck .mockup-card .card-footer { 
+    background-color: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.swipe-deck .mockup-card .card-body {
+    background-color: transparent; /* Make the body a flex container */
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Allow it to take up remaining space */
+    min-height: 0; /* Crucial for flex shrinking */
+    padding: 0; /* Remove padding from the body itself */
+}
+
+.swipe-deck .mockup-card .card-footer {
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    flex-shrink: 0; /* Prevent the footer from being pushed out */
+}
+
+.card-scrollable-content {
+    overflow-y: auto; /* Add scroll for overflowing content */
+    padding: 1rem; /* Add padding to the inner scrollable area */
+}
+
+.swipe-deck .mockup-card:not(:first-child) {
+    transform: scale(0.95) translateY(10px);
+    opacity: 0;
+}
+
+.swipe-deck .mockup-card.left {
+    transform: translateX(-150%) rotate(-30deg) scale(0.8) !important;
+}
+
+.swipe-deck .mockup-card.right {
+    transform: translateX(150%) rotate(30deg) scale(0.8) !important;
+}
+
+.swipe-btn {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-weight: bold;
+    border: 2px solid white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.2s ease-in-out;
+    color: #fff; /* Ensure button text is white */
+}
+
+.swipe-btn.btn-danger {
+    background-color: #ef4444; /* Solid red for Pass */
+    border-color: #ef4444;
+}
+
+.swipe-btn.btn-success {
+    background-color: #22c55e; /* Solid green for Connect */
+    border-color: #22c55e;
+}
+
+.swipe-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* Mobile-first Tinder-like view */
+@media (max-width: 991.98px) {
+    .swipe-deck {
+        max-width: 100%;
+        height: 100%;
+    }
+
+    .swipe-deck .mockup-card {
+        border: none;
+    }
+}
+
+/* "Crazy" details view for mobile */
+.founder-details-view {
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ffc3; /* A vibrant, futuristic color */
+    text-shadow: 0 0 5px #00ffc3, 0 0 10px #00ffc3;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 255, 195, 0.2);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInDetail 0.5s ease-out forwards;
+}
+
+.detail-label {
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: none;
+}
+
+.detail-value {
+    font-weight: bold;
+}
+
+@keyframes fadeInDetail {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scan line animation for that "crazy" innovative feel */
+.founder-details-view::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #00ffc3;
+    box-shadow: 0 0 10px #00ffc3;
+    animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+    from { transform: translateY(-10px); }
+    to { transform: translateY(100%); }
+}
+
+/* Compatibility Gauge Styles */
+.gauge-container {
+    text-align: center;
+}
+
+.gauge-dial {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #00ffc3 calc(var(--score) * 1%), 
+        rgba(255, 255, 255, 0.1) calc(var(--score) * 1%)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: --score 0.5s ease-out;
+}
+
+.gauge-dial::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    background: #091023; /* Match screen background */
+    border-radius: 50%;
+}
+
+.gauge-value {
+    position: relative;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.gauge-label {
+    font-size: 0.6rem;
+    color: #94a3b8;
+    margin-top: 2px;
+    text-transform: uppercase;
+}
+
+/* Compatibility Analysis Styles */
+.compatibility-analysis {
+    margin: 1rem 0;
+    font-size: 0.8rem;
+}
+.analysis-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 0.5rem;
+}
+.analysis-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.compat-level {
+    font-weight: bold;
+}
+.compat-high { color: #22c55e; } /* Green */
+.compat-medium { color: #eab308; } /* Yellow */
+.compat-low { color: #ef4444; } /* Red */
