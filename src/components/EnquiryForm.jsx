@@ -64,7 +64,7 @@ export default function EnquiryForm() {
         {status.success && <Alert variant="success">Thanks — we received your enquiry. We'll respond soon.</Alert>}
 
         <Form onSubmit={submit} aria-label="Enquiry form">
-          <input type="hidden" name="website" value={form.website} onChange={update("website")} style={{display:'none'}} />
+          <input type="hidden" name="website" value={form.website} onChange={update("website")} style={{ display: 'none' }} />
           <Form.Group className="mb-2">
             <Form.Label className="small">Name</Form.Label>
             <Form.Control value={form.name} onChange={update("name")} placeholder="Your name" required />
@@ -105,7 +105,7 @@ export default function EnquiryForm() {
             <Button type="submit" disabled={status.sending} className="cta-primary">
               {status.sending ? "Sending…" : "Send Enquiry"}
             </Button>
-            <Button variant="outline-light" onClick={() => { setForm({ name: "", email: "", role: "", stage: "", message: "", contact: "email", website: "" }); setStatus({ sending:false, success:false, error:"" }); }}>
+            <Button variant="outline-light" onClick={() => { setForm({ name: "", email: "", role: "", stage: "", message: "", contact: "email", website: "" }); setStatus({ sending: false, success: false, error: "" }); }}>
               Clear
             </Button>
           </div>

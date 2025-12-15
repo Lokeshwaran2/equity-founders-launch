@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { 
+import {
     Container,
     Row,
     Col,
@@ -13,8 +13,10 @@ import HowItWorks from "./components/HowItWorks";
 import FeaturesGrid from "./components/FeaturesGrid";
 import EarlyAccessModal from "./components/EarlyAccessModal";
 import EnquiryForm from "./components/EnquiryForm";
-import WaitlistForm from "./components/WaitlistForm"; 
+import WaitlistForm from "./components/WaitlistForm";
 import FounderSwipeCard from "./components/FounderSwipeCard";
+import MatchControls from "./components/MatchControls";
+import MatchSimulatorScreen from "./components/MatchSimulatorScreen";
 
 const Testimonial = ({ quote, name, role }) => (
     <div className="testimonial p-4 text-center">
@@ -28,6 +30,17 @@ export default function LaunchPage() {
     const [showModal, setShowModal] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+    // Live Match State
+    const [matchValues, setMatchValues] = useState({
+        commitment: 85,
+        equity: 40,
+        risk: 75
+    });
+
+    const handleMatchChange = (key, value) => {
+        setMatchValues(prev => ({ ...prev, [key]: value }));
+    };
+
     useEffect(() => {
         const handleMouseMove = (event) => {
             setMousePosition({ x: event.clientX, y: event.clientY });
@@ -37,7 +50,7 @@ export default function LaunchPage() {
 
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
- 
+
     const crazyStyles = `
         @keyframes crazy-hue-rotate {
             0% { filter: hue-rotate(0deg); }
@@ -83,7 +96,7 @@ export default function LaunchPage() {
         }
     `;
 
-    return ( 
+    return (
         <div
             className="page-bg"
             style={{
@@ -129,26 +142,27 @@ export default function LaunchPage() {
                                 <h1 className="hero-title mt-3">
                                     Find your co-founder — aligned by skill, vision & equity.
                                 </h1>
-                                <p className="lead text-muted">
-                                    Equity-first matching, transparent expectations, and founder tools to move from match to team fast. Built to help founders find the right co-founder and launch with confidence.
-                                </p>
 
-                                <div className="d-flex gap-3 mt-4 flex-wrap">
-                                    <a href="#pricing">
-                                        <Button size="lg" className="cta-primary btn-crazy-pulse">
-                                            Get Early Access
-                                        </Button>
-                                    </a>
-                                    <a href="#features">
-                                        <Button size="lg" variant="outline-light">
-                                            Explore Features
-                                        </Button>
-                                    </a>
-                                </div>
+                                {/* LIVE MATCH CONTROLS */}
+                                <div className="mt-5">
+                                    <div className="d-flex align-items-center gap-2 mb-2 text-info">
+                                        <span className="badge bg-primary bg-opacity-25 text-primary border border-primary border-opacity-25">NEW</span>
+                                        <small className="fw-bold" style={{ letterSpacing: '1px' }}>LIVE FOUNDER MATCH ENGINE</small>
+                                    </div>
+                                    <h5 className="mb-3 text-white-50">Adjust inputs. Watch compatibility change.</h5>
 
-                                <div className="trust mt-4 d-flex gap-3 flex-wrap">
-                                    <div className="small text-muted">Trusted by early founders</div>
-                                    <div className="small text-muted">• Private beta</div>
+                                    <MatchControls values={matchValues} onChange={handleMatchChange} />
+
+                                    <div className="mt-4">
+                                        <a href="#pricing">
+                                            <Button size="lg" className="cta-primary btn-crazy-pulse w-100">
+                                                Get Early Access
+                                            </Button>
+                                        </a>
+                                        <div className="mt-3 small text-muted text-center" style={{ fontSize: '0.8rem' }}>
+                                            Built for founders willing to commit before consensus.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </Col>
@@ -158,7 +172,8 @@ export default function LaunchPage() {
                                 <div className="iphone-frame">
                                     <div className="iphone-screen">
                                         <div className="iphone-notch"><div className="iphone-speaker"></div></div>
-                                        <FounderSwipeCard />
+                                        {/* Pass state to the screen */}
+                                        <MatchSimulatorScreen values={matchValues} />
                                     </div>
                                 </div>
                             </div>
@@ -174,9 +189,9 @@ export default function LaunchPage() {
                         <Col md={4}>
                             <Card className="feature-card h-100 border-0 p-4">
                                 <div style={{ fontSize: 24 }}>⚡</div>
-                                <h5 className="feature-title mt-3">Fast validation</h5>
+                                <h5 className="feature-title mt-3">Eliminate mismatches</h5>
                                 <p className="text-muted small mb-0">
-                                    Prototype your co-founder match hypothesis with quick intros and validation checklists designed for early teams.
+                                    Avoid months of wasted time. Identifying alignment gaps early prevents the #1 cause of startup failure: founder conflict.
                                 </p>
                             </Card>
                         </Col>
@@ -267,7 +282,7 @@ export default function LaunchPage() {
 
                     <Row className="justify-content-center">
                         <Col md={7}>
-                           <EnquiryForm />
+                            <EnquiryForm />
                         </Col>
                     </Row>
                 </Container>

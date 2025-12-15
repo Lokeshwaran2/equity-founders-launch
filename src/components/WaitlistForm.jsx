@@ -40,17 +40,35 @@ export default function WaitlistForm() {
     return (
         <>
             {response.message && <Alert variant={response.type}>{response.message}</Alert>}
-            <Form onSubmit={handleSubmit} className="d-flex">
-                <Form.Control
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <Button variant="primary" type="submit" disabled={loading} className="ms-2">
-                    {loading ? <Spinner as="span" animation="border" size="sm" /> : 'Join Waitlist'}
-                </Button>
+
+            <div className="d-flex justify-content-between align-items-center mb-3">
+                <div className="d-flex align-items-center gap-2">
+                    <span className="position-relative d-flex h-2 w-2">
+                        <span className="animate-ping position-absolute d-inline-flex h-100 w-100 rounded-circle bg-success opacity-75"></span>
+                        <span className="position-relative d-inline-flex rounded-circle h-2 w-2 bg-success" style={{ width: '8px', height: '8px' }}></span>
+                    </span>
+                    <small className="text-white-50 fw-bold" style={{ fontSize: '0.75rem', letterSpacing: '0.5px' }}>
+                        312 / 1,000 SLOTS REMAINING
+                    </small>
+                </div>
+            </div>
+
+            <Form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
+                <div className="d-flex">
+                    <Form.Control
+                        type="email"
+                        placeholder="founder@company.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <Button variant="primary" type="submit" disabled={loading} className="ms-2 text-nowrap">
+                        {loading ? <Spinner as="span" animation="border" size="sm" /> : 'Request Access'}
+                    </Button>
+                </div>
+                <small className="text-muted text-center mt-2" style={{ fontSize: '0.75rem' }}>
+                    We review every application. No spam. No mass invites.
+                </small>
             </Form>
         </>
     );
