@@ -136,8 +136,8 @@ export default function LaunchPage() {
                 <Container fluid="lg">
                     <Row className="align-items-center">
                         <Col lg={6} className="text-white hero-content">
-                            {/* Desktop-only hero text */}
-                            <div className="d-none d-lg-block">
+                            {/* Hero text - Visible on all devices */}
+                            <div>
                                 <div className="pill">Launch Offer — Free Beta</div>
                                 <h1 className="hero-title mt-3">
                                     Find your co-founder — aligned by skill, vision & equity.
