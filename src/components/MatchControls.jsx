@@ -25,7 +25,7 @@ const ControlSlider = ({ label, value, onChange, minLabel, maxLabel, color }) =>
 
 export default function MatchControls({ values, onChange }) {
     return (
-        <div className="match-controls p-4 mt-3" style={{ background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(30, 41, 59, 0.4))', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)' }}>
+        <div className="match-controls p-4 mt-3" style={{ background: '#0f1724', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', position: 'relative', zIndex: 5 }}>
             <p className="text-muted mb-4 small"><i className="bi bi-sliders me-2"></i>Adjust inputs to simulate match</p>
 
             <ControlSlider
