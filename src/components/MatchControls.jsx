@@ -25,7 +25,7 @@ const ControlSlider = ({ label, value, onChange, minLabel, maxLabel, color }) =>
 
 export default function MatchControls({ values, onChange }) {
     return (
-        <div className="match-controls p-4 mt-3" style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)' }}>
+        <div className="match-controls p-4 mt-3" style={{ background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(30, 41, 59, 0.4))', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)' }}>
             <p className="text-muted mb-4 small"><i className="bi bi-sliders me-2"></i>Adjust inputs to simulate match</p>
 
             <ControlSlider
@@ -58,8 +58,8 @@ export default function MatchControls({ values, onChange }) {
             {/* Judgmental Microcopy */}
             <div className="mt-4 pt-3 border-top border-white-10 text-center">
                 <p className={`mb-0 fw-bold transition-all duration-300 ${((values.commitment + values.equity + values.risk) / 3) >= 90 ? 'text-success' :
-                        ((values.commitment + values.equity + values.risk) / 3) >= 70 ? 'text-info' :
-                            ((values.commitment + values.equity + values.risk) / 3) >= 50 ? 'text-warning' : 'text-danger'
+                    ((values.commitment + values.equity + values.risk) / 3) >= 70 ? 'text-info' :
+                        ((values.commitment + values.equity + values.risk) / 3) >= 50 ? 'text-warning' : 'text-danger'
                     }`}>
                     {(() => {
                         const avg = (values.commitment + values.equity + values.risk) / 3;
